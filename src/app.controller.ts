@@ -1,12 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { OpenAIService } from './openai.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly openaiService: OpenAIService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('/openai')
+  async getOpenAIResponse(): Promise<string> {
+    const prompt = 'Hello, OpenAI!';
+    return await this.openaiService.callOpenAPI(prompt);
   }
 }

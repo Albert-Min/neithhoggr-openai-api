@@ -1,22 +1,32 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { OpenAIService } from './openai.service';
 
 describe('AppController', () => {
   let appController: AppController;
+  let openaiService: OpenAIService;
 
   beforeEach(async () => {
-    const app: TestingModule = await Test.createTestingModule({
+    const module: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
-      providers: [AppService],
+      providers: [OpenAIService],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
+    appController = module.get<AppController>(AppController);
+    openaiService = module.get<OpenAIService>(OpenAIService);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+  describe('getOpenAIResponse', () => {
+    it('should call callOpenAPI method of OpenAIService with the correct prompt', async () => {
+      const prompt = 'Hello, OpenAI!';
+      const mockResponse = 'Mock response';
+
+      jest.spyOn(openaiService, 'callOpenAPI').mockResolvedValue(mockResponse);
+
+      const response = await appController.getOpenAIResponse();
+
+      expect(openaiService.callOpenAPI).toHaveBeenCalledWith(prompt);
+      expect(response).toBe(mockResponse);
     });
   });
 });
