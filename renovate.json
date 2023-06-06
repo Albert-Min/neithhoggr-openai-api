@@ -8,7 +8,6 @@
     "dependencies"
   ],
   "commitMessagePrefix": "chore(deps):",
-  "prTitlePrefix": "chore(deps):",
   "prBodyTemplate": "This PR updates dependencies to their latest versions.",
   "timezone": "UTC",
   "packageRules": [
