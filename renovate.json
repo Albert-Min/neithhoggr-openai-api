@@ -11,13 +11,6 @@
   "prTitlePrefix": "chore(deps):",
   "prBodyTemplate": "This PR updates dependencies to their latest versions.",
   "timezone": "UTC",
-  "allowedVersions": {
-    "rangeStrategy": "widen"
-  },
-  "ignorePaths": [
-    "^vendor/",
-    "^dist/"
-  ],
   "packageRules": [
     {
       "packagePatterns": [
