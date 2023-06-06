@@ -3,6 +3,9 @@
   "extends": [
     "config:base"
   ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "automerge": true,
   "labels": [
     "dependencies"
@@ -12,13 +15,157 @@
   "timezone": "UTC",
   "packageRules": [
     {
-      "packagePatterns": [
-        "^@nestjs/"
+      "matchManagers": [
+        "npm",
+        "nvm"
       ],
-      "enabledManagers": [
+      "commitMessageExtra": "{{newValue}}",
+      "commitMessageTopic": "{{depName}}"
+    },
+    {
+      "matchDepTypes": [
+        "dependencies"
+      ],
+      "matchManagers": [
         "npm"
       ],
-      "prBodyTemplate": "This PR updates Nest.js dependencies to their latest versions."
+      "semanticCommitType": "fix"
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "matchPackageNames": [
+        "@types/node"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "enabled": false
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "matchPackagePatterns": [
+        "^@types/"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch"
+      ],
+      "automerge": true,
+      "commitMessageExtra": "",
+      "groupName": "npm definitely typed",
+      "prPriority": 99,
+      "recreateClosed": true,
+      "schedule": "before 9:00 am on Tuesday"
+    },
+    {
+      "matchPackageNames": [
+        "node",
+        "docker.io/node",
+        "@types/node"
+      ],
+      "allowedVersions": "/^[1-9]*[02468]\\..*/"
+    },
+    {
+      "excludePackagePatterns": [
+        "^@types/"
+      ],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch"
+      ],
+      "commitMessageExtra": "",
+      "groupName": "npm dev dependencies",
+      "recreateClosed": true,
+      "schedule": "before 9:00 am on Tuesday"
+    },
+    {
+      "excludePackagePatterns": [
+        "^@types/"
+      ],
+      "matchDepTypes": [
+        "peerDependencies"
+      ],
+      "matchManagers": [
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor",
+        "patch"
+      ],
+      "commitMessageExtra": "",
+      "groupName": "npm peer dependencies",
+      "recreateClosed": true,
+      "schedule": "before 9:00 am on Tuesday"
+    },
+    {
+      "matchManagers": [
+        "github-actions"
+      ],
+      "additionalBranchPrefix": "",
+      "commitMessageExtra": "",
+      "groupName": "github actions",
+      "recreateClosed": true,
+      "schedule": "before 9:00 am on Wednesday"
+    },
+    {
+      "matchManagers": [
+        "docker-compose",
+        "dockerfile"
+      ],
+      "commitMessageExtra": "",
+      "group": {
+        "commitMessageTopic": "{{groupName}}"
+      },
+      "groupName": "docker images",
+      "recreateClosed": true,
+      "schedule": "before 9:00 am on Wednesday"
+    },
+    {
+      "matchDepTypes": [
+        "dependencies"
+      ],
+      "matchManagers": [
+        "npm"
+      ],
+      "matchPackageNames": [
+        "aws-sdk"
+      ],
+      "matchPackagePatterns": [
+        "^@aws-sdk/"
+      ],
+      "commitMessageExtra": "",
+      "groupName": "aws-sdk",
+      "recreateClosed": true,
+      "schedule": "before 9:00 am on the first day of the month"
+    },
+    {
+      "matchUpdateTypes": [
+        "lockFileMaintenance"
+      ],
+      "automerge": true,
+      "prPriority": 99,
+      "schedule": "before 9:00 am every 2 weeks on Wednesday"
+    },
+    {
+      "matchUpdateTypes": [
+        "pin"
+      ],
+      "automerge": true,
+      "prPriority": 99,
+      "schedule": "before 9:00 am every weekday"
     }
   ],
   "dependencyDashboard": true
