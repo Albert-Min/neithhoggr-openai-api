@@ -3,6 +3,9 @@
   "extends": [
     "config:base"
   ],
+  "fileMatch": [
+    "^\\.nvmrc$"
+  ],
   "automerge": true,
   "labels": [
     "dependencies"
