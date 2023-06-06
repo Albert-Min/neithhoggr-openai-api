@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "automerge": true,
+  "labels": [
+    "dependencies"
+  ],
+  "commitMessagePrefix": "chore(deps):",
+  "prTitlePrefix": "chore(deps):",
+  "prBodyTemplate": "This PR updates dependencies to their latest versions.",
+  "timezone": "UTC",
+  "allowedVersions": {
+    "rangeStrategy": "widen"
+  },
+  "ignorePaths": [
+    "^vendor/",
+    "^dist/"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "^@nestjs/"
+      ],
+      "enabledManagers": [
+        "npm"
+      ],
+      "prBodyTemplate": "This PR updates Nest.js dependencies to their latest versions."
+    }
+  ],
+  "dependencyDashboard": true
+}
