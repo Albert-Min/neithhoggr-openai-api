@@ -13,8 +13,7 @@
   "commitMessagePrefix": "chore(deps):",
   "prBodyTemplate": "This PR updates dependencies to their latest versions.",
   "timezone": "UTC",
-  "packageRules": [
-    {
+  "packageRules": [{
       "matchManagers": [
         "npm",
         "nvm"
