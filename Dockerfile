@@ -6,6 +6,8 @@ COPY package.json /app
 COPY pnpm-lock.yaml /app
 
 RUN npm install -g pnpm
+# Disable husky in CI/Docker/Prod
+RUN npm pkg delete scripts.prepare
 RUN pnpm install
 
 COPY . .
