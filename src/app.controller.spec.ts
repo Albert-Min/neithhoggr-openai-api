@@ -29,4 +29,11 @@ describe('AppController', () => {
       expect(response).toBe(mockResponse);
     });
   });
+
+  describe('getHeartbeat', () => {
+    it('should return "OK"', () => {
+      const result = appController.getHeartbeat();
+      expect(result).toBe('OK');
+    });
+  });
 });

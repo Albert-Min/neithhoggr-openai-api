@@ -10,4 +10,9 @@ export class AppController {
     const prompt = 'Hello, OpenAI!';
     return await this.openaiService.callOpenAPI(prompt);
   }
+
+  @Get('/heartbeat')
+  getHeartbeat(): string {
+    return 'OK';
+  }
 }
