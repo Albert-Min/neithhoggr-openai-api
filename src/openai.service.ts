@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Configuration, OpenAIApi } from 'openai';
-import { OPENAI_API_KEY } from './environment';
 import * as console from 'console';
+import { Configuration, OpenAIApi } from 'openai';
+
+import { OPENAI_API_KEY } from './environment';
 
 @Injectable()
 export class OpenAIService {
@@ -14,7 +15,7 @@ export class OpenAIService {
     this.openai = new OpenAIApi(configuration);
   }
 
-  async callOpenAPI(prompt: string): Promise<string> {
+  async createCompletion(prompt: string): Promise<string> {
     try {
       const response = await this.openai.createCompletion({
         model: 'text-davinci-003',
