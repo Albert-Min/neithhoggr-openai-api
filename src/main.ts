@@ -26,6 +26,9 @@ async function bootstrap() {
   SwaggerModule.setup('swagger', app, document);
 
   await app.listen(3001, '0.0.0.0');
+  console.log(`Application is running on: ${await app.getUrl()}`);
+  console.log(`Swagger doc: ${await app.getUrl()}/swagger`);
+  console.log(`GraphQL playground: ${await app.getUrl()}/graphql`);
 
   // Config for hot reloading in local
   if (module.hot) {
