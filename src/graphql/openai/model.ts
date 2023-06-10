@@ -2,13 +2,13 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Model {
-  @Field()
+  @Field({ description: 'The ID of the model.' })
   id: string;
 
-  @Field()
+  @Field({ description: 'The type of the object.' })
   object: string;
 
-  @Field()
+  @Field({ description: 'The owner of the model.' })
   owned_by: string;
 
   @Field(() => [Permission], { nullable: true })

@@ -1,6 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import * as console from 'console';
-import { Configuration, ListModelsResponse, Model, OpenAIApi } from 'openai';
+import {
+  Configuration,
+  CreateCompletionRequest,
+  CreateCompletionResponse,
+  ListModelsResponse,
+  Model,
+  OpenAIApi,
+} from 'openai';
 
 import { OPENAI_API_KEY } from './environment';
 
@@ -15,15 +22,14 @@ export class OpenAIService {
     this.openai = new OpenAIApi(configuration);
   }
 
-  async createCompletion(prompt: string): Promise<string> {
+  async createCompletion(
+    createCompletionRequest: CreateCompletionRequest,
+  ): Promise<CreateCompletionResponse> {
     try {
-      const response = await this.openai.createCompletion({
-        model: 'text-davinci-003',
-        prompt,
-        max_tokens: 100,
-        temperature: 0,
-      });
-      return response.data.choices[0].text.trim();
+      const response = await this.openai.createCompletion(
+        createCompletionRequest,
+      );
+      return response.data;
     } catch (error) {
       console.error('OpenAI API Error:', error);
       throw error;

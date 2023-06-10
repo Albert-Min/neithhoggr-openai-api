@@ -1,6 +1,8 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateCompletionResponse } from 'openai';
 
+import { CreateCompletionRequestDTO } from './openai.dto';
 import { OpenAIService } from './openai.service';
 
 const requestPath = 'openai';
@@ -10,15 +12,18 @@ const requestPath = 'openai';
 export class OpenAIController {
   constructor(private readonly openaiService: OpenAIService) {}
 
-  @Get('/prompt')
+  @Post('/prompt')
   @ApiResponse({
     status: 200,
     description: 'Response from openai api',
     type: String,
   })
   async getOpenAIPromotResponse(
-    @Param('prompt') prompt: string,
+    @Body()
+    createCompletionRequest: CreateCompletionRequestDTO,
   ): Promise<string> {
-    return await this.openaiService.createCompletion(prompt);
+    const createCompletionResponse: CreateCompletionResponse =
+      await this.openaiService.createCompletion(createCompletionRequest);
+    return createCompletionResponse.choices[0].text.trim();
   }
 }

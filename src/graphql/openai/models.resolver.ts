@@ -7,13 +7,17 @@ import { Model, ModelsResponse } from './model';
 export class ModelsResolver {
   constructor(private openaiService: OpenAIService) {}
 
-  @Query(() => ModelsResponse)
-  async models(): Promise<ModelsResponse> {
+  @Query(() => [ModelsResponse], {
+    description: 'Lists the currently available models.',
+  })
+  async models() {
     return await this.openaiService.listModels();
   }
 
-  @Query(() => Model)
-  async model(@Args('id') id: string): Promise<Model> {
+  @Query(() => Model, { description: 'Retrieves a model instance.' })
+  async model(
+    @Args('id', { description: 'The ID of the model to retrieve.' }) id: string,
+  ) {
     return await this.openaiService.retrieveModel(id);
   }
 }

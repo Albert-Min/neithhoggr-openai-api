@@ -3,8 +3,13 @@
 # ------------------------------------------------------
 
 type Model {
+  """The ID of the model."""
   id: String!
+
+  """The type of the object."""
   object: String!
+
+  """The owner of the model."""
   owned_by: String!
   permission: [Permission!]
 }
@@ -30,6 +35,12 @@ type Permission {
 }
 
 type Query {
-  model(id: String!): Model!
-  models: ModelsResponse!
+  """Retrieves a model instance."""
+  model(
+    """The ID of the model to retrieve."""
+    id: String!
+  ): Model!
+
+  """Lists the currently available models."""
+  models: [ModelsResponse!]!
 }
