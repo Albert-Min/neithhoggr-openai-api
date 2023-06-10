@@ -6,12 +6,27 @@ type Model {
   id: String!
   object: String!
   owned_by: String!
-  permission: [String!]
+  permission: [Permission!]
 }
 
 type ModelsResponse {
   data: [Model!]!
   object: String!
+}
+
+type Permission {
+  allow_create_engine: Boolean!
+  allow_fine_tuning: Boolean!
+  allow_logprobs: Boolean!
+  allow_sampling: Boolean!
+  allow_search_indices: Boolean!
+  allow_view: Boolean!
+  created: Float!
+  group: String
+  id: String!
+  is_blocking: Boolean!
+  object: String!
+  organization: String!
 }
 
 type Query {
