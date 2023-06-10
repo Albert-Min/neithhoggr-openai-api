@@ -2,10 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Query {
-  yourQuery: YourQueryType!
+type Model {
+  id: String!
+  object: String!
+  owned_by: String!
+  permission: [String!]
 }
 
-type YourQueryType {
-  yourQuery: String!
+type ModelsResponse {
+  data: [Model!]!
+  object: String!
+}
+
+type Query {
+  model(id: String!): Model!
+  models: ModelsResponse!
 }

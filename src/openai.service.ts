@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as console from 'console';
-import { Configuration, OpenAIApi } from 'openai';
+import { Configuration, ListModelsResponse, Model, OpenAIApi } from 'openai';
 
 import { OPENAI_API_KEY } from './environment';
 
@@ -23,8 +23,27 @@ export class OpenAIService {
         max_tokens: 100,
         temperature: 0,
       });
-      console.log(response);
       return response.data.choices[0].text.trim();
+    } catch (error) {
+      console.error('OpenAI API Error:', error);
+      throw error;
+    }
+  }
+
+  async retrieveModel(id: string): Promise<Model> {
+    try {
+      const response = await this.openai.retrieveModel(id);
+      return response.data;
+    } catch (error) {
+      console.error('OpenAI API Error:', error);
+      throw error;
+    }
+  }
+
+  async listModels(): Promise<ListModelsResponse> {
+    try {
+      const response = await this.openai.listModels();
+      return response.data;
     } catch (error) {
       console.error('OpenAI API Error:', error);
       throw error;
