@@ -1,16 +1,49 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class Completion {
-  // Define the fields of the Completion object here
-  // based on the response of the OpenAI API
+export class Choice {
+  @Field()
+  text: string;
+
+  @Field()
+  index: number;
+
+  @Field({ nullable: true })
+  logprobs?: number;
+
+  @Field()
+  finish_reason: string;
 }
 
 @ObjectType()
-export class CreateCompletionResponse {
-  @Field(() => Completion)
-  data: Completion;
+export class Usage {
+  @Field()
+  prompt_tokens: number;
+
+  @Field()
+  completion_tokens: number;
+
+  @Field()
+  total_tokens: number;
+}
+
+@ObjectType()
+export class Completion {
+  @Field()
+  id: string;
 
   @Field()
   object: string;
+
+  @Field()
+  created: number;
+
+  @Field()
+  model: string;
+
+  @Field(() => [Choice])
+  choices: Choice[];
+
+  @Field(() => Usage)
+  usage: Usage;
 }

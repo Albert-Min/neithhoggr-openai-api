@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 
 import { OpenAIService } from '../../openai.service';
+import { CompletionsResolver } from './completions.resolver';
 import { ModelsResolver } from './models.resolver';
 
 @Module({
-  providers: [ModelsResolver, OpenAIService],
+  providers: [ModelsResolver, CompletionsResolver, OpenAIService],
 })
 export class OpenAIModule {}
