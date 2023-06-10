@@ -7,7 +7,7 @@ import { Model, ModelsResponse } from './model';
 export class ModelsResolver {
   constructor(private openaiService: OpenAIService) {}
 
-  @Query(() => [ModelsResponse], {
+  @Query(() => ModelsResponse, {
     description: 'Lists the currently available models.',
   })
   async models() {
