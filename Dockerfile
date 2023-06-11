@@ -1,21 +1,27 @@
-FROM node:20
+FROM node:20 as base
+
 WORKDIR /app
 
-COPY tsconfig.json /app
-COPY package.json /app
-COPY pnpm-lock.yaml /app
+ARG PORT
+ENV PORT $PORT
+EXPOSE $PORT
+
+ARG OPENAI_API_KEY
+ENV OPENAI_API_KEY $OPENAI_API_KEY
+
+COPY --chown=node:node package.json /app
+COPY --chown=node:node pnpm-lock.yaml /app
 
 RUN npm install -g pnpm
+
 # Disable husky in CI/Docker/Prod
 RUN npm pkg delete scripts.prepare
 RUN pnpm install
 
-COPY . .
+COPY --chown=node:node . .
 
 RUN pnpm run build
 
-RUN adduser --disabled-password --gecos openai-api openai-api
-RUN chmod -R go-w *
-USER openai-api
+USER node
 
 CMD ["pnpm", "start:prod"]
