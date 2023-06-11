@@ -41,11 +41,11 @@ export class CreateCompletionInput {
   })
   n?: number;
 
-  @Field({
-    nullable: true,
-    description: 'Whether to stream back partial progress.',
-  })
-  stream?: boolean;
+  //  @Field({
+  //    nullable: true,
+  //    description: 'Whether to stream back partial progress.',
+  //  })
+  //  stream?: boolean;
 
   @Field({
     nullable: true,

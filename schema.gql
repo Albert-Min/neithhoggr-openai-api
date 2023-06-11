@@ -58,9 +58,6 @@ input CreateCompletionInput {
   """Up to 4 sequences where the API will stop generating further tokens."""
   stop: [String!]
 
-  """Whether to stream back partial progress."""
-  stream: Boolean
-
   """The suffix that comes after a completion of inserted text."""
   suffix: String
 
