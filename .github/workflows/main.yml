@@ -1,8 +1,8 @@
-name: Steps on branches
+name: Deploy to production
 
 on:
   push:
-    branches-ignore:
+    branches:
       - main
 
 jobs:
@@ -13,5 +13,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Intall dependencies and run unit test
-        uses: ./.github/actions/install.yml
+      - name: Deploy to production
+        uses: ./.github/actions/deploy-railway.yml
