@@ -1,5 +1,5 @@
-name: Deploy
-description: Deploy to Railway
+name: Destroy
+description: Remove the most recent deployment
 
 runs:
   using: 'composite'
@@ -9,5 +9,5 @@ runs:
       shell: bash
 
     - name: Deploy
-      run: railway up
+      run: railway down -y
       shell: bash

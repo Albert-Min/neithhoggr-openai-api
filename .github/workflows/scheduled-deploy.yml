@@ -1,12 +1,11 @@
-name: Steps on branches
+name: Scheduled deployment
 
 on:
-  push:
-    branches-ignore:
-      - main
+  schedule:
+    - cron: '0 1 * * *' # Schedule at 1:00 AM UTC
 
 jobs:
-  build:
+  deploy:
     concurrency:
       group: ${{ github.ref }}
       cancel-in-progress: true
@@ -19,3 +18,8 @@ jobs:
 
       - name: Intall dependencies and run unit test
         uses: ./.github/actions/install
+
+      - name: Deploy to production
+        uses: ./.github/actions/deploy-railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
