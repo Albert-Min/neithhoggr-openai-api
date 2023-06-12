@@ -6,6 +6,10 @@
     'before 3pm every weekday',
     'every weekend',
   ],
+  lockFileMaintenance: {
+    enabled: true,
+    automerge: true,
+  },
   automergeSchedule: [
     'after 1am every weekday',
     'before 3pm every weekday',
@@ -13,9 +17,13 @@
   ],
   automerge: true,
   extends: ['config:base'],
+  platformAutomerge: true,
   packageRules: [
-    { matchUpdateTypes: ['minor'], minor: { automerge: true } },
-    { matchUpdateTypes: ['patch'], patch: { automerge: true } },
+    {
+      matchUpdateTypes: ['minor', 'patch'],
+      matchCurrentVersion: '!/^0/',
+      automerge: true,
+    },
     {
       description: 'Use node versioning for `(containerbase|renovate)/node` images',
       matchDatasources: ['docker'],
@@ -32,5 +40,10 @@
     { matchPackagePatterns: ['node'], groupName: 'Node.js version' },
     { matchPackagePatterns: ['^@types/.+'], groupName: '@types' },
     { matchPackagePatterns: ['^nestjs-.+'], groupName: 'NestJS' },
+    {
+      matchDepTypes: ['devDependencies'],
+      matchPackagePatterns: ['lint', 'prettier'],
+      automerge: true,
+    },
   ],
 }
