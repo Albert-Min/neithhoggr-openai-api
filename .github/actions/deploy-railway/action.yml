@@ -1,0 +1,13 @@
+name: Deploy to Railway
+description: Deploy to Railway
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Railway
+      run: npm i -g @railway/cli
+      shell: bash
+
+    - name: Deploy
+      run: railway up
+      shell: bash
