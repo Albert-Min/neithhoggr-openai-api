@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { OpenAIService } from '../../openai.service';
+import { OpenAIService } from '../../openai/openai.service';
 import { CompletionsResolver } from './completions.resolver';
 import { ModelsResolver } from './models.resolver';
 

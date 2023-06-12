@@ -4,7 +4,7 @@
     "builder": "DOCKERFILE"
   },
   "deploy": {
-    "healthcheckPath": "/heartbeat",
+    "healthcheckPath": "/health",
     "healthcheckTimeout": 1000,
     "restartPolicyType": "NEVER"
   }

@@ -9,7 +9,7 @@ import {
   OpenAIApi,
 } from 'openai';
 
-import { OPENAI_API_KEY } from './environment';
+import { OPENAI_API_KEY } from '../environment';
 
 @Injectable()
 export class OpenAIService {

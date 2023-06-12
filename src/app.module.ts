@@ -3,10 +3,10 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
-import { AppController } from './app.controller';
 import { OpenAIModule } from './graphql/openai/module';
-import { OpenAIController } from './openai.controller';
-import { OpenAIService } from './openai.service';
+import { HealthModule } from './health/health.module';
+import { OpenAIController } from './openai/openai.controller';
+import { OpenAIService } from './openai/openai.service';
 
 @Module({
   imports: [
@@ -18,8 +18,9 @@ import { OpenAIService } from './openai.service';
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
     OpenAIModule,
+    HealthModule,
   ],
-  controllers: [AppController, OpenAIController],
+  controllers: [OpenAIController],
   providers: [OpenAIService],
 })
 export class AppModule {}
