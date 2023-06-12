@@ -39,3 +39,7 @@ runs:
     - name: Run unit tests
       run: pnpm run test
       shell: bash
+
+    - name: Run unit tests
+      run: pnpm run lint
+      shell: bash
