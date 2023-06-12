@@ -5,14 +5,14 @@ on:
     - cron: '0 15 * * *' # Schedule at 15:00 UTC
 
 jobs:
-  deploy:
+  scheduled-destroy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to production
+      - name: Destruction
         uses: ./.github/actions/destroy-railway
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
