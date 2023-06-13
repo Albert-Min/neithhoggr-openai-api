@@ -1,6 +1,6 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 
-import { OpenAIService } from '../../openai/openai.service';
+import { OpenAIService } from '../../../openai/openai.service';
 import { Model, ModelsResponse } from './model';
 
 @Resolver(() => Model)

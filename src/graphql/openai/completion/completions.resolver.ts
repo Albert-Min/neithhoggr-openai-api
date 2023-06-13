@@ -1,6 +1,6 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import { OpenAIService } from '../../openai/openai.service';
+import { OpenAIService } from '../../../openai/openai.service';
 import { Completion } from './completion.model';
 import { CreateCompletionInput } from './create-completion.input';
 
