@@ -1,12 +1,15 @@
 import fastifyCsrf from '@fastify/csrf-protection';
+import fastifyRateLimit from '@fastify/rate-limit';
 import { NestFactory } from '@nestjs/core';
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from './app.module';
+import { corsConfig } from './config/cors';
+import { rateLimitConfig } from './config/rate-limit';
+import { enableSwagger } from './config/swagger';
 import { PORT } from './environment';
 
 async function bootstrap() {
@@ -15,23 +18,13 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
 
-  const config = new DocumentBuilder()
-    .setTitle('Neithhoggr')
-    .setDescription('Neithhoggr OpenAI API')
-    .setVersion('1.0')
-    .build();
-
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger', app, document);
-
+  enableSwagger(app);
   app.enableShutdownHooks();
-  app.enableCors({
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  });
+  app.enableCors(corsConfig);
+
   await app.register(fastifyCsrf);
+  await app.register(fastifyRateLimit, rateLimitConfig);
+
   await app.listen(PORT, '0.0.0.0');
 
   console.log(`Application is running on: ${await app.getUrl()}`);
