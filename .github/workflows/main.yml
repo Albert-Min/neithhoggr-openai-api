@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '0 1 * * *' # Schedule at 1:00 AM UTC
 
 jobs:
   deploy:
