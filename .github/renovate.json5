@@ -1,5 +1,6 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: ['config:base', ':disableDependencyDashboard'],
   timezone: 'UTC',
   schedule: [
     'after 1am every weekday',
@@ -16,7 +17,6 @@
     'every weekend',
   ],
   automerge: true,
-  extends: ['config:base'],
   platformAutomerge: true,
   packageRules: [
     {
