@@ -3,9 +3,15 @@
   extends: [
     'config:base',
     ':disableDependencyDashboard',
-    ':automergeMinor',
-    ':automergePr',
+    ':rebaseStalePrs',
+    ':maintainLockFilesWeekly',
+    ':semanticCommits',
+    ':semanticCommitScope(deps)',
+    'docker:enableMajor',
+    'docker:pinDigests',
+    'group:linters',
     ':pinVersions',
+    'helpers:pinGitHubActionDigests',
   ],
   labels: ['✅ Renovate'],
   gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
@@ -26,15 +32,21 @@
   ],
   platformAutomerge: true,
   packageRules: [
+    {
+      description: 'Automerge non-major updates',
+      matchUpdateTypes: ['minor', 'patch', 'digest', 'lockFileMaintenance'],
+      automerge: true,
+    },
     { matchPackagePatterns: ['^nestjs-.+'], groupName: 'NestJS' },
     {
       matchDepTypes: ['devDependencies'],
-      matchPackagePatterns: ['lint', 'prettier'],
-      labels: ['✅ Renovate', '💅 Linting'],
+      labels: ['✅ Renovate', '🛠 Dev'],
     },
     {
-      matchDepTypes: ['devDependencies'],
-      labels: ['✅ Renovate', '🛠 Dev'],
+      description: 'Group prettier packages',
+      matchPackageNames: ['prettier'],
+      matchPackagePatterns: ['^@prettier/', '^prettier-plugin-'],
+      groupName: 'prettier packages',
     },
   ],
 }
