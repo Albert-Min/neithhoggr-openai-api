@@ -1,49 +1,40 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
-  extends: ['config:base', ':disableDependencyDashboard'],
+  extends: [
+    'config:base',
+    ':disableDependencyDashboard',
+    ':automergeMinor',
+    ':automergePr',
+    ':pinVersions',
+  ],
+  labels: ['✅ Renovate'],
+  gitAuthor: 'Renovate Bot <bot@renovateapp.com>',
+  vulnerabilityAlerts: {
+    labels: ['✅ Renovate', '🔐 Security'],
+    automerge: true,
+  },
   timezone: 'UTC',
   schedule: [
     'after 1am every weekday',
     'before 3pm every weekday',
     'every weekend',
   ],
-  lockFileMaintenance: {
-    enabled: true,
-    automerge: true,
-  },
   automergeSchedule: [
     'after 1am every weekday',
     'before 3pm every weekday',
     'every weekend',
   ],
-  automerge: true,
   platformAutomerge: true,
   packageRules: [
-    {
-      matchUpdateTypes: ['minor', 'patch'],
-      matchCurrentVersion: '!/^0/',
-      automerge: true,
-    },
-    {
-      description: 'Use node versioning for `(containerbase|renovate)/node` images',
-      matchDatasources: ['docker'],
-      matchPackagePatterns: [
-        '^(?:(?:docker|ghcr)\\.io/)?(?:containerbase|renovate)/node$',
-      ],
-      versioning: 'node',
-    },
-    {
-      matchManagers: ['npm', 'nvm'],
-      matchPackageNames: ['@types/node'],
-      versioning: 'node',
-    },
-    { matchPackagePatterns: ['node'], groupName: 'Node.js version' },
-    { matchPackagePatterns: ['^@types/.+'], groupName: '@types' },
     { matchPackagePatterns: ['^nestjs-.+'], groupName: 'NestJS' },
     {
       matchDepTypes: ['devDependencies'],
       matchPackagePatterns: ['lint', 'prettier'],
-      automerge: true,
+      labels: ['✅ Renovate', '💅 Linting'],
+    },
+    {
+      matchDepTypes: ['devDependencies'],
+      labels: ['✅ Renovate', '🛠 Dev'],
     },
   ],
 }

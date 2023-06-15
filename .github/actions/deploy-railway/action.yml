@@ -9,5 +9,5 @@ runs:
       shell: bash
 
     - name: Deploy
-      run: railway up
+      run: railway up --service "neithhoggr-openai-api"
       shell: bash
