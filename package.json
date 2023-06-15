@@ -21,7 +21,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@apollo/server": "^4.7.3",
+    "@apollo/server": "4.7.3",
     "@as-integrations/fastify": "2.0.0",
     "@fastify/csrf-protection": "6.3.0",
     "@fastify/rate-limit": "8.0.1",
