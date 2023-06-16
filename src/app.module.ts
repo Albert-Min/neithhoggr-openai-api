@@ -4,11 +4,10 @@ import { GraphQLModule } from '@nestjs/graphql';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
-import { OpenAIModule } from './graphql/openai/module';
+import { OpenAIGQLModule } from './graphql/openai/module';
 import { landingPagePlugin } from './graphql/plugins/landingPage';
 import { HealthModule } from './health/health.module';
-import { OpenAIController } from './openai/openai.controller';
-import { OpenAIService } from './openai/openai.service';
+import { OpenAIRESTModule } from './openai/openai.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -19,14 +18,15 @@ import { UsersModule } from './users/users.module';
       sortSchema: true,
       playground: false,
       plugins: [landingPagePlugin()],
-      context: ({ req, res }): any => ({ req, res }),
     }),
-    OpenAIModule,
+    // REST
     HealthModule,
     AuthModule,
     UsersModule,
+    OpenAIRESTModule,
+    // GraphQL
+    OpenAIGQLModule,
   ],
-  controllers: [AppController, OpenAIController],
-  providers: [OpenAIService],
+  controllers: [AppController],
 })
 export class AppModule {}

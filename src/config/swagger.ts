@@ -6,6 +6,7 @@ export const enableSwagger = (app: INestApplication) => {
     .setTitle('Neithhoggr')
     .setDescription('Neithhoggr OpenAI API')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

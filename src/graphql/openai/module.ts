@@ -7,4 +7,4 @@ import { ModelsResolver } from './model/models.resolver';
 @Module({
   providers: [ModelsResolver, CompletionsResolver, OpenAIService],
 })
-export class OpenAIModule {}
+export class OpenAIGQLModule {}

@@ -1,6 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCompletionResponse } from 'openai';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 import { CreateCompletionRequestDTO } from './openai.dto';
 import { OpenAIService } from './openai.service';
@@ -18,6 +19,8 @@ export class OpenAIController {
     description: 'Response from openai api',
     type: String,
   })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   async getOpenAIPromotResponse(
     @Body()
     createCompletionRequest: CreateCompletionRequestDTO,
