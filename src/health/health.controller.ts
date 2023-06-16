@@ -3,14 +3,14 @@ import { ApiResponse } from '@nestjs/swagger';
 import {
   HealthCheck,
   HealthCheckService,
-  HttpHealthIndicator,
+  MongooseHealthIndicator,
 } from '@nestjs/terminus';
 
 @Controller('health')
 export class HealthController {
   constructor(
     private health: HealthCheckService,
-    private http: HttpHealthIndicator,
+    private mongoose: MongooseHealthIndicator,
   ) {}
 
   @Get()
@@ -20,8 +20,6 @@ export class HealthController {
     status: 200,
   })
   check() {
-    return this.health.check([
-      () => this.http.pingCheck('nestjs-docs', 'https://docs.nestjs.com'),
-    ]);
+    return this.health.check([async () => this.mongoose.pingCheck('mongoose')]);
   }
 }

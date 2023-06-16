@@ -8,6 +8,8 @@ EXPOSE $PORT
 
 ARG OPENAI_API_KEY
 ENV OPENAI_API_KEY $OPENAI_API_KEY
+ARG MONGO_URL
+ENV MONGO_URL $MONGO_URL
 
 COPY --chown=node:node package.json /app
 COPY --chown=node:node pnpm-lock.yaml /app

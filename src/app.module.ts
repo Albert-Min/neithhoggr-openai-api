@@ -1,17 +1,20 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { MongooseModule } from '@nestjs/mongoose';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
-import { OpenAIGQLModule } from './graphql/openai/module';
+import { MONGO_URL } from './environment';
+import { OpenAIGQLModule } from './graphql/openai/openai.module';
 import { landingPagePlugin } from './graphql/plugins/landingPage';
+import { UserGQLModule } from './graphql/user/user.module';
 import { HealthModule } from './health/health.module';
 import { OpenAIRESTModule } from './openai/openai.module';
-import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
+    MongooseModule.forRoot(MONGO_URL),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
@@ -22,10 +25,10 @@ import { UsersModule } from './users/users.module';
     // REST
     HealthModule,
     AuthModule,
-    UsersModule,
     OpenAIRESTModule,
     // GraphQL
     OpenAIGQLModule,
+    UserGQLModule,
   ],
   controllers: [AppController],
 })

@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { GqlAuthGuard } from 'src/graphql/auth/gql-auth.guard';
+import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
 
 import { OpenAIService } from '../../../openai/openai.service';
 import { Completion } from './completion.model';
