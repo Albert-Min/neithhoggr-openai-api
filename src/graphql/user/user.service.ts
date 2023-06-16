@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { GraphQLError } from 'graphql';
 import { Model, Types } from 'mongoose';
 

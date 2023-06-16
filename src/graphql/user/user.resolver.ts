@@ -94,7 +94,7 @@ export class UserResolver {
 
   @Query(() => User)
   @UseGuards(GqlAuthGuard)
-  async CurrentUser(@CurrentUser() user: User) {
+  async currentUser(@CurrentUser() user: User) {
     try {
       return await this.userService.findOne(user._id);
     } catch (err) {

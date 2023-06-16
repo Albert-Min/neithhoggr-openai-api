@@ -14,7 +14,7 @@ export class CreateUserInput {
   @Field()
   email: string;
 
-  @Field()
+  @Field({ nullable: true })
   createdAt: string = new Date().toISOString();
 }
 
