@@ -4,7 +4,6 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { AppController } from './app.controller';
-import { AuthModule } from './auth/auth.module';
 import { MONGO_URL } from './environment';
 import { OpenAIGQLModule } from './graphql/openai/openai.module';
 import { landingPagePlugin } from './graphql/plugins/landingPage';
@@ -24,7 +23,6 @@ import { OpenAIRESTModule } from './openai/openai.module';
     }),
     // REST
     HealthModule,
-    AuthModule,
     OpenAIRESTModule,
     // GraphQL
     OpenAIGQLModule,

@@ -15,6 +15,7 @@ import { UserService } from './user.service';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
+      secretOrPrivateKey: jwtConstants.secret,
       signOptions: { expiresIn: JWT_TOKEN_EXPIRES_IN },
     }),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
