@@ -8,11 +8,16 @@ import {
 
 import { AppModule } from './app.module';
 import { corsConfig } from './config/cors';
+import { enableLocalMemoryMongoDB } from './config/db.mongo';
 import { rateLimitConfig } from './config/rate-limit';
 import { enableSwagger } from './config/swagger';
-import { PORT } from './environment';
+import { isProudction, PORT } from './environment';
 
 async function bootstrap() {
+  if (!isProudction) {
+    await enableLocalMemoryMongoDB();
+  }
+
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),

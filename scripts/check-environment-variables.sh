@@ -1,6 +1,11 @@
 #!/bin/sh
 set -e
 
+if [ -z ${NODE_ENV} ];then
+    echo "NODE_ENV needs to be set"
+    exit 1
+fi
+
 if [ -z ${OPENAI_API_KEY} ];then
     echo "OPENAI_API_KEY needs to be set"
     exit 1

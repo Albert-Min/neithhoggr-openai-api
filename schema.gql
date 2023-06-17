@@ -71,6 +71,14 @@ input CreateCompletionInput {
   user: String
 }
 
+input CreateUserInput {
+  createdAt: String = "2023-06-17T11:06:30.341Z"
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+}
+
 type Model {
   """The ID of the model."""
   id: String!
@@ -91,6 +99,11 @@ type ModelsResponse {
 type Mutation {
   """Creates a completion for the provided prompt and parameters."""
   createCompletion(input: CreateCompletionInput!): Completion!
+  createUser(createUserInput: CreateUserInput!): User!
+  login(email: String!, password: String!): String!
+  removeUser(_id: String!): User!
+  updatePassword(currPass: String!, newPass: String!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
 type Permission {
@@ -109,6 +122,10 @@ type Permission {
 }
 
 type Query {
+  currentUser: User!
+  findAll: [User!]!
+  findOne(_id: String!): User!
+
   """Retrieves a model instance."""
   model(
     """The ID of the model to retrieve."""
@@ -119,8 +136,32 @@ type Query {
   models: ModelsResponse!
 }
 
+"""Admin create projects & tasks, Basic create tasks"""
+enum Roles {
+  Admin
+  Basic
+}
+
+input UpdateUserInput {
+  createdAt: String = "2023-06-17T11:06:30.343Z"
+  email: String
+  firstName: String
+  lastName: String
+}
+
 type Usage {
   completion_tokens: Float!
   prompt_tokens: Float!
   total_tokens: Float!
+}
+
+type User {
+  _id: String!
+  createdAt: String!
+  email: String!
+  firstName: String!
+  imageURL: String
+  lastName: String!
+  password: String!
+  role: Roles
 }

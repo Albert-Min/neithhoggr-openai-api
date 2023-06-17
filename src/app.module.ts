@@ -4,7 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { AppController } from './app.controller';
-import { MONGO_URL } from './environment';
+import { getMongoDBURI } from './config/db.mongo';
 import { OpenAIGQLModule } from './graphql/openai/openai.module';
 import { landingPagePlugin } from './graphql/plugins/landingPage';
 import { UserGQLModule } from './graphql/user/user.module';
@@ -13,7 +13,11 @@ import { OpenAIRESTModule } from './openai/openai.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(MONGO_URL),
+    MongooseModule.forRootAsync({
+      useFactory: async () => ({
+        uri: getMongoDBURI(),
+      }),
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
