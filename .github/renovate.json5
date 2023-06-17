@@ -37,7 +37,10 @@
       matchUpdateTypes: ['minor', 'patch', 'digest', 'lockFileMaintenance'],
       automerge: true,
     },
-    { matchPackagePatterns: ['^nestjs-.+'], groupName: 'NestJS' },
+    {
+      matchPackageNames: ['^@nestjs/'],
+      groupName: '@nestjs dependencies',
+    },
     {
       matchDepTypes: ['devDependencies'],
       labels: ['✅ Renovate', '🛠 Dev'],
