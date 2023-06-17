@@ -10,8 +10,7 @@ ARG PORT \
 ENV PORT=$PORT \ 
     OPENAI_API_KEY=$OPENAI_API_KEY \
     MONGO_URL=$MONGO_URL \
-    JWT_SECRET=$JWT_SECRET \
-    NODE_ENV="production"
+    JWT_SECRET=$JWT_SECRET
 
 COPY --chown=node:node package.json /app
 COPY --chown=node:node pnpm-lock.yaml /app
@@ -25,6 +24,9 @@ RUN pnpm install
 COPY --chown=node:node . .
 
 RUN pnpm run build
+
+# Set after build
+ENV NODE_ENV="production"
 
 USER node
 
