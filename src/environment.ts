@@ -1,6 +1,8 @@
+export const MONGO_DATABASE = 'neithhoggr-openai-api';
+
 // Required
 export const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-export const MONGO_URL = process.env.MONGO_URL;
+export const MONGO_URL = `${process.env.MONGO_URL}/${MONGO_DATABASE}?authSource=admin`;
 export const JWT_SECRET = process.env.JWT_SECRET;
 
 // Optional
