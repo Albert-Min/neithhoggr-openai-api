@@ -40,7 +40,7 @@
     "@nestjs/terminus": "9.2.2",
     "axios": "1.4.0",
     "bcrypt": "^5.1.0",
-    "graphql": "16.6.0",
+    "graphql": "16.7.0",
     "install": "0.13.0",
     "mongoose": "^7.3.0",
     "openai": "3.3.0",
