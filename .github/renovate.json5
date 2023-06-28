@@ -38,7 +38,7 @@
       automerge: true,
     },
     {
-      matchPackageNames: ['^@nestjs/'],
+      matchPackagePrefixes: ['@nestjs/'],
       groupName: '@nestjs dependencies',
     },
     {

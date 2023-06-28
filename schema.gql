@@ -72,7 +72,7 @@ input CreateCompletionInput {
 }
 
 input CreateUserInput {
-  createdAt: String = "2023-06-17T11:06:30.341Z"
+  createdAt: String
   email: String!
   firstName: String!
   lastName: String!
@@ -143,7 +143,7 @@ enum Roles {
 }
 
 input UpdateUserInput {
-  createdAt: String = "2023-06-17T11:06:30.343Z"
+  createdAt: String
   email: String
   firstName: String
   lastName: String

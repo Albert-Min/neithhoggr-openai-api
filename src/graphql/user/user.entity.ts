@@ -42,9 +42,9 @@ export class User {
   @Prop()
   role?: Roles;
 
-  @Field()
+  @Field({ defaultValue: new Date().toISOString() })
   @Prop()
-  createdAt: string = new Date().toISOString();
+  createdAt: string;
 }
 
 export type UserDocument = User & Document;
