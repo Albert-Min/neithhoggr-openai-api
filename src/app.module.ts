@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { getMongoDBURI } from './config/db.mongo';
 import { OpenAIGQLModule } from './graphql/openai/openai.module';
+import { IntrospectionPlugin } from './graphql/plugins/introspectionPlugin';
 import { landingPagePlugin } from './graphql/plugins/landingPage';
 import { UserGQLModule } from './graphql/user/user.module';
 import { HealthModule } from './health/health.module';
@@ -33,5 +34,6 @@ import { OpenAIRESTModule } from './openai/openai.module';
     UserGQLModule,
   ],
   controllers: [AppController],
+  providers: [IntrospectionPlugin],
 })
 export class AppModule {}
