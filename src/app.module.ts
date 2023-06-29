@@ -25,6 +25,7 @@ import { OpenAIRESTModule } from './openai/openai.module';
       sortSchema: true,
       playground: false,
       plugins: [landingPagePlugin()],
+      introspection: true,
     }),
     // REST
     HealthModule,
